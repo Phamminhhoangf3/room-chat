@@ -3,7 +3,7 @@ import { GET_DB } from '../config/mongodb.js';
 
 const MESSAGE_COLLECTION_NAME = 'message';
 const MESSAGE_COLLECTION_SCHEMA = Joi.object({
-  message: Joi.string().required().min(3).max(50).trim().strict()
+  message: Joi.string().required().max(255).trim().strict()
 });
 
 const validationBeforeCreate = async data => {
