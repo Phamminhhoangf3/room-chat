@@ -7,12 +7,12 @@ const MESSAGE_COLLECTION_SCHEMA = Joi.object({
 });
 
 const validationBeforeCreate = async data => {
-  return await MESSAGE_COLLECTION_SCHEMA.validateAsync(data, { abortEarly: false });
+  return await MESSAGE_COLLECTION_SCHEMA.validate(data, { abortEarly: false });
 };
 
 const createNew = async data => {
   try {
-    const validData = await validationBeforeCreate(data);
+    const validData = await validationBeforeCreate({ message: data });
     const createdRole = await GET_DB().collection(MESSAGE_COLLECTION_NAME).insertOne(validData);
     return createdRole;
   } catch (error) {
