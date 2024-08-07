@@ -4,6 +4,6 @@
 
 - Room chat:
 
- ![image](https://github.com/user-attachments/assets/fe3448dc-f7d0-4600-9792-23315bba1c68)
+  ![image](https://github.com/user-attachments/assets/fe3448dc-f7d0-4600-9792-23315bba1c68)
 
 
