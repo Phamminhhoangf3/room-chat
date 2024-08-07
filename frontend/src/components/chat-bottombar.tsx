@@ -1,18 +1,14 @@
 import React, { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Account, loggedInUserData, Message, UserData } from "./data";
 import { Textarea } from "./textarea";
 
 interface ChatBottombarProps {
-  sendMessage: (newMessage: Message) => void;
-  isMobile: boolean;
-  account: UserData | undefined;
+  sendMessage: (newMessage: string) => void;
+
 }
 
 export default function ChatBottombar({
   sendMessage,
-  isMobile,
-  account,
 }: ChatBottombarProps) {
   const [message, setMessage] = useState("");
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -22,14 +18,8 @@ export default function ChatBottombar({
   };
 
   const handleSend = () => {
-    if (message.trim() && account) {
-      const newMessage: Message = {
-        id: message.length + 1,
-        name: account.name,
-        avatar: account.avatar,
-        message: message.trim(),
-      };
-      sendMessage(newMessage);
+    if (message.trim()) {
+      sendMessage(message.trim());
       setMessage("");
 
       if (inputRef.current) {

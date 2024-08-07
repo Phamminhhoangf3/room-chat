@@ -1,11 +1,14 @@
 import React from "react";
 import SelectAvatar from "./selectAvatar";
 
-export const FormLogin = ({ joinRoom, valuesForm, setValuesForm }) => {
+export const FormLogin = ({ joinRoom, valuesForm, setValuesForm }: any) => {
   const { username, avatar, room } = valuesForm;
   return (
     <div className="w-full overflow-y-auto overflow-x-hidden h-full flex flex-col items-center justify-center">
       <form className="w-full max-w-sm" onSubmit={joinRoom}>
+        <div className="md:flex md:items-center mb-6">
+          <SelectAvatar value={avatar} setValuesForm={setValuesForm} />
+        </div>
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
             <label
@@ -21,7 +24,10 @@ export const FormLogin = ({ joinRoom, valuesForm, setValuesForm }) => {
               placeholder="Nhập tên"
               value={username}
               onChange={(e) =>
-                setValuesForm((prev) => ({ ...prev, username: e.target.value }))
+                setValuesForm((prev: any) => ({
+                  ...prev,
+                  username: e.target.value,
+                }))
               }
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             />
@@ -42,7 +48,10 @@ export const FormLogin = ({ joinRoom, valuesForm, setValuesForm }) => {
               id="grid-state"
               value={room}
               onChange={(e) =>
-                setValuesForm((prev) => ({ ...prev, room: e.target.value }))
+                setValuesForm((prev: any) => ({
+                  ...prev,
+                  room: e.target.value,
+                }))
               }
             >
               <option value="1">Phòng 1</option>
@@ -59,9 +68,6 @@ export const FormLogin = ({ joinRoom, valuesForm, setValuesForm }) => {
               </svg>
             </div>
           </div>
-        </div>
-        <div className="md:flex md:items-center mb-6">
-          <SelectAvatar value={avatar} setValuesForm={setValuesForm} />
         </div>
         <div className="md:flex md:items-center">
           <div className="md:w-1/3"></div>

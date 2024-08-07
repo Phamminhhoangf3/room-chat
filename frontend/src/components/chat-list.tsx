@@ -8,15 +8,13 @@ import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 
 interface ChatListProps {
   messages?: Message[];
-  sendMessage: (newMessage: Message) => void;
-  isMobile: boolean;
+  sendMessage: (newMessage: string) => void;
   account: UserData | undefined;
 }
 
 export function ChatList({
   messages,
   sendMessage,
-  isMobile,
   account,
 }: ChatListProps) {
   const messagesContainerRef = useRef<HTMLDivElement>(null);
@@ -91,11 +89,7 @@ export function ChatList({
             ))}
         </AnimatePresence>
       </div>
-      <ChatBottombar
-        account={account}
-        sendMessage={sendMessage}
-        isMobile={isMobile}
-      />
+      <ChatBottombar sendMessage={sendMessage} />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 interface ImportMetaEnv {
-  VITE_YOUR_API_KEY: string;
+  VITE_YOUR_IO_PORT: string;
 }
 
 interface ImportMeta {
