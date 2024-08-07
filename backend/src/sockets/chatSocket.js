@@ -14,9 +14,7 @@ export const connection = io => {
     socket.on('joinRoom', ({ username, room }) => {
       socket.join(room);
 
-      socket.emit('message', username, 'Welcome to the chat!');
-
-      socket.to(room).emit('message', username, 'join room ssuccess');
+      socket.to(room).emit('message', username, `${username} đã vào phong chat!`);
 
       socket.on('chatMessage', msg => {
         io.to(room).emit('message', username, msg);

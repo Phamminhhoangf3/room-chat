@@ -1,29 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { loggedInUserData, Message, UserData } from "./data";
+import React, { SyntheticEvent, useEffect, useState } from "react";
+import { Message, UserData } from "./data";
 import { ChatList } from "./chat-list";
 import { io } from "socket.io-client";
-
+import { FormLogin } from "./formLogin";
 interface ChatProps {
-  // messages?: Message[];
   selectedUser: UserData;
   isMobile: boolean;
 }
 
-export function Chat({
-  // messages,
-  selectedUser,
-  isMobile,
-}: ChatProps) {
-  // const [messagesState, setMessages] = React.useState<Message[]>(messages ?? []);
-  const [username, setUsername] = useState("");
+const ioPort = import.meta.env.VITE_YOUR_API_KEY;
+export function Chat({ isMobile }: ChatProps) {
   const [socket, setSocket] = useState<any>();
-  const [room, setRoom] = useState("");
   const [account, setAccount] = useState<UserData>();
-  console.log("🚀 ~ account:", account);
   const [messages, setMessages] = useState<any>([]);
+  const [valuesForm, setValuesForm] = useState<any>({
+    username: "Hoàng",
+    room: "1",
+    avatar: "/User1.png",
+  });
+  const { room, username, avatar } = valuesForm;
 
   useEffect(() => {
-    const _socket = io("http://localhost:3000");
+    const OI_URI = `http://localhost:${ioPort}/`;
+    const _socket = io(OI_URI);
     _socket.on("message", (sender, message) => {
       const newMsg =
         typeof message === "string"
@@ -34,7 +33,7 @@ export function Chat({
               message: message,
             }
           : message;
-      setMessages((prev) => [...prev, newMsg]);
+      setMessages((prev: any) => [...prev, newMsg]);
     });
     setSocket(_socket);
     return () => {
@@ -42,12 +41,13 @@ export function Chat({
     };
   }, []);
 
-  const joinRoom = () => {
+  const joinRoom = (event: SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
+    event.preventDefault();
     if (username && room) {
       if (!account)
         setAccount({
           id: 6,
-          avatar: "/User2.png",
+          avatar,
           name: username,
         });
       socket.emit("joinRoom", { username, room });
@@ -60,28 +60,19 @@ export function Chat({
 
   return (
     <div className="flex flex-col justify-between w-full h-full">
-      <ChatList
-        messages={messages}
-        sendMessage={sendMessage}
-        isMobile={isMobile}
-        account={account}
-      />
-      {!account && (
-        <div>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Room"
-            value={room}
-            onChange={(e) => setRoom(e.target.value)}
-          />
-          <button onClick={joinRoom}>Join Room</button>
-        </div>
+      {account ? (
+        <ChatList
+          messages={messages}
+          sendMessage={sendMessage}
+          isMobile={isMobile}
+          account={account}
+        />
+      ) : (
+        <FormLogin
+          joinRoom={joinRoom}
+          setValuesForm={setValuesForm}
+          valuesForm={valuesForm}
+        />
       )}
     </div>
   );

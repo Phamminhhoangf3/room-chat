@@ -77,7 +77,7 @@ export default function ChatBottombar({
             name="message"
             placeholder="Aa"
             className=" w-full border rounded-full flex items-center h-9 resize-none overflow-hidden bg-background"
-          ></Textarea>
+          />
         </motion.div>
       </AnimatePresence>
     </div>

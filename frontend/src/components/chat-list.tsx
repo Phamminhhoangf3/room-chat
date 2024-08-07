@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
-import classNames from "classnames";
+import clsx from "clsx";
 import { Message, UserData } from "./data";
 import ChatBottombar from "./chat-bottombar";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
@@ -55,13 +55,10 @@ export function ChatList({
                   originX: 0.5,
                   originY: 0.5,
                 }}
-                className={classNames(
-                  "flex flex-col gap-2 p-4 whitespace-pre-wrap",
-                  {
-                    "items-start": message.name !== account.name,
-                    "items-end": message.name === account.name,
-                  }
-                )}
+                className={clsx("flex flex-col gap-2 p-4 whitespace-pre-wrap", {
+                  "items-start": message.name !== account.name,
+                  "items-end": message.name === account.name,
+                })}
               >
                 <div className="flex gap-3 items-center">
                   {message.name !== account.name && (
