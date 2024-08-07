@@ -4,4 +4,5 @@
 
 - Room chat:
 
-![image](https://github.com/user-attachments/assets/a1757a5e-1e5f-4c97-8b8d-b6d14946b78e)
+![image](https://github.com/user-attachments/assets/b2c4e9fb-eee1-46b0-a852-5e2a7b164707)
+
