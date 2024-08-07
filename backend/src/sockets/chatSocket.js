@@ -21,7 +21,7 @@ export const connection = io => {
       });
 
       socket.on('disconnect', () => {
-        io.to(room).emit('message', `${username} has left the chat`);
+        io.to(room).emit('message', `${username} đã rời phòng chat!`);
       });
     });
   });
